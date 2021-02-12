@@ -1,0 +1,18 @@
+# 	Specify a base image
+FROM node:alpine
+
+# 	Specify a work directory for npm - workaround for V15 of node
+WORKDIR /app
+
+#	Copy the necessary local configuration files from the local build context to server context
+COPY package.json .
+
+# 	Install dependencies for Node
+RUN npm install
+
+
+COPY . .
+
+#	Specify the default command to run
+CMD ["npm", "run", "start"]
+
